@@ -82,9 +82,6 @@ struct private_handle_t {
   int unaligned_height;  // holds height client asked to allocate
   int format;
   int buffer_type;
-  unsigned int layer_count;
-  uint64_t id;
-  uint64_t usage;
 
   unsigned int size;
   unsigned int offset;
@@ -92,6 +89,9 @@ struct private_handle_t {
   uint64_t base;
   uint64_t base_metadata;
   uint64_t gpuaddr;
+  unsigned int layer_count;
+  uint64_t id;
+  uint64_t usage;
 #ifdef __cplusplus
   static const int kNumFds = 2;
   static const int kMagic = 'gmsm';
@@ -112,15 +112,15 @@ struct private_handle_t {
         unaligned_height(uh),
         format(format),
         buffer_type(buf_type),
-        layer_count(1),
-        id(0),
-        usage(usage),
         size(size),
         offset(0),
         offset_metadata(0),
         base(0),
         base_metadata(0),
-        gpuaddr(0) {
+        gpuaddr(0),
+        layer_count(1),
+        id(0),
+        usage(usage) {
     version = static_cast<int>(sizeof(native_handle));
     numInts = NumInts();
     numFds = kNumFds;
